@@ -1,6 +1,6 @@
 # Public Invention Respiratory Data Standard (PIRDS) (v0.1)
 
-# Event based protocol
+## Event based protocol
 
 PIRDS data is a series of events. It has no headers, though some events provide meta-information and may be grouped
 together to form a header.
@@ -19,7 +19,7 @@ This is followed by an 32-bit unsigned integers representing milliseconds. In PI
 
 Finally, 32-bit signed integer 
 is provided. The type of every measurement is multiplied by a decimal to allow an integer to express the 
-acceptable range of value. Thus every measurement fits within 8 bytes.
+acceptable range of value. Thus every measurement fits within 9 bytes.
 
 The Types are:
 
@@ -44,9 +44,19 @@ A minial ventilator might provide D0, B0, and A0.
 
 ## Meta Events
 
+Meta Events are not measurements but may provide information about measurements. 
+The mEta Events begin with character "E". The second character defines the meta
+event
 
-
-
+1. M : Message : the next byte defines the number of characters following. That
+many characters define a string that is an arbitrary message.
+1. N : Name event : the same format as a message.
+1. D : Device identifier : the same format as a device.
+1. C : Clock event : The Clock event is used to tie the relative milliseconds
+to an absolute time. The first byte after C is a number n. However, the next
+four bytes are an unsigned integer representing milliseconds in this data stream.
+After that follows n bytes which of a "time string" that specifies wall-clock time 
+in an unspecified format.
 
 # License
 
