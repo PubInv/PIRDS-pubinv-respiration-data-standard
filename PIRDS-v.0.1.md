@@ -28,6 +28,8 @@ The Types are:
 3. F : slm (liters at 0C per minute) times 1000
 4. O : FiO2 (fractional oxygen) times 100 (thus a percentage)
 5. H : humidity (% humidity ???) times 100
+6. V : Volume in millilieters
+7. B : Breaths per minute times 10
 
 The Sensor names roughly corresponed to identifiable locations in the breathing circuit.
 We expect this to be extended.
@@ -41,6 +43,20 @@ For example, the first 3 sensors in the airway might be named A0, A1, A2. No dis
 the standard for inhalation airway from exhalation standard.
 
 A minial ventilator might provide D0, B0, and A0.
+
+## Assertions
+
+Assertions have the same structure as measurements. The begin with the character "A".
+The most important asseritons are:
+
+1. "B" : Type "B" bpm
+2. "V" : Type "V", tidal volume in milliters
+3. "X" : Maxiumum (peak) pressure
+4. "E" : Minimum airway pressure (PEEP)
+
+We have not defined the time period of the these assertions. At present, it is undefined.
+It may loosely be construed as "since the last such event reported". (Lauria, should we add a second field
+to represent the start of the time period of the asswertion?)
 
 ## Meta Events
 
