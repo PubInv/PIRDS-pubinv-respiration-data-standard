@@ -26,8 +26,8 @@ acceptable range of value. Thus every measurement fits within 9 bytes.
 The Types are:
 
 1. T : Temperature in degrees Celsius times 100
-2. P : cm H2O (a medical standard) times 100
-3. F : slm (liters at 0C per minute) times 1000
+2. P : Pressure cm H2O (a medical standard) times 100
+3. F : Flow slm (liters at 0C per minute) times 1000
 4. O : FiO2 (fractional oxygen) times 100 (thus a percentage)
 5. H : humidity (% humidity ???) times 100
 6. V : Volume in millilieters
@@ -85,6 +85,27 @@ to an absolute time. The first byte after C is a number n. However, the next
 four bytes are an unsigned integer representing milliseconds in this data stream.
 After that follows n bytes which of a "time string" that specifies wall-clock time 
 in an unspecified format.
+
+# JSON Expression
+
+Although driven by a need for a byte-level protocol to communicate electronically, there is
+also need for a JSON-level expression of the standard. The obvious approach is to define
+and event as a JSON object. We hope to make it somewhat human readable, but maintain a 
+direct connection to the Byte Level expression of the PIRDS standard.
+
+Our first expression will thus be simple JSON objects, directly corresponding to the 
+standard, except that instead of using one-character codes will use the full word from
+which the character was derived. When it is a two-word, compond noun we will use only 
+the word in which the character appeas. The code character adn ONLY the code character
+will be capitalized.
+
+So for example, a Flow measurment event will look like:
+
+```JavaScript
+{ "Event" : "M",
+  "Type" : "P",
+  
+```
 
 # License
 
