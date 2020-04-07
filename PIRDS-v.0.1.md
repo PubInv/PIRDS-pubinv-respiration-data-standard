@@ -12,6 +12,9 @@ is meant in part for medical professionals, some unit types are chosen to confor
 
 The most common PIRDS data are Measurement events.
 
+![MeasurementByteFields](https://github.com/PubInv/respiration-data-standard/blob/master/images/measurements_fields.png)
+*Byte Fields contained in a measurement event*
+
 Measurements are of fixed length, and consisting the character "M", a measurement type character designator,
 a sensor designator consisting of a letter (location) and a nuumber 0-255. 
 
@@ -43,6 +46,17 @@ For example, the first 3 sensors in the airway might be named A0, A1, A2. No dis
 the standard for inhalation airway from exhalation standard.
 
 A minial ventilator might provide D0, B0, and A0.
+
+
+### Sample Measurement
+
+The following measurement is a temperature measurement (B1: ‘T’) from the third (B3: 2) device in the ambient air (B2: ‘B’). The measurement occurred at 35ms (B4 - B7: 0035) and has a value of 25 degrees C (B9 - B11: 0250). 
+
+![SampleMeasurement](https://github.com/PubInv/respiration-data-standard/blob/master/images/sample_measurement.png)
+
+Hex Equivalent: 4D54 4202 0023 00FA
+
+
 
 ## Assertions
 
