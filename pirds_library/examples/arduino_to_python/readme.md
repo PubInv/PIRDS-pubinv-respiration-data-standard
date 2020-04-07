@@ -2,7 +2,7 @@
 
 This is an extremely basic example of sending a measurement event from an Arduino to a Python script over the serial port.
 
-The measurement data is simply sent as a set of. There is no event handling, or processing on either end. This is simply to test basic functionality of the connection and the data structure. 
+There is no event handling, or processing on either end. This is simply to test basic functionality of the connection and the data structure. 
 
 ## Prerequisites
 
