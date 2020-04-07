@@ -51,7 +51,7 @@ A minial ventilator might provide D0, B0, and A0.
 
 The following measurement is a temperature measurement (B1: ‘T’) from the third (B3: 2) device in the ambient air (B2: ‘B’). The measurement occurred at 35ms (B4 - B7: 0035) and has a value of 25 degrees C (B9 - B11: 0250). 
 
-![SampleMeasurement](https://github.com/PubInv/respiration-data-standard/blob/master/images/sample_measurement.png)
+![SampleMeasurement](https://github.com/PubInv/respiration-data-standard/blob/master/images/sample_measurementpng)
 
 Hex Equivalent: 4D54 4202 0023 00FA
 
