@@ -13,7 +13,6 @@ is meant in part for medical professionals, some unit types are chosen to confor
 The most common PIRDS data are Measurement events.
 
 ![MeasurementByteFields](https://github.com/PubInv/respiration-data-standard/blob/master/images/measurement_fields.png)
-*Byte Fields contained in a measurement event*
 
 Measurements are of fixed length, and consisting the character "M", a measurement type character designator,
 a sensor designator consisting of a letter (location) and a nuumber 0-255. 
@@ -55,7 +54,6 @@ The following measurement is a temperature measurement (B1: ‘T’) from the th
 ![SampleMeasurement](https://github.com/PubInv/respiration-data-standard/blob/master/images/sample_measurement.png)
 
 Hex Equivalent: 4D54 4202 0023 00FA
-
 
 
 ## Assertions
