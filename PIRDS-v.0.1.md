@@ -33,6 +33,8 @@ The Types are:
 5. H : humidity (% humidity ???) times 100
 6. V : Volume in millilieters
 7. B : Breaths per minute times 10
+8. G : Gas resitance (ohms) used to check for volatile compounds
+8. A : Altitude in meters (used as a check of the system)
 
 The Sensor names roughly corresponed to identifiable locations in the breathing circuit.
 We expect this to be extended.
