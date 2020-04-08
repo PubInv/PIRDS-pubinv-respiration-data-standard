@@ -86,25 +86,28 @@ four bytes are an unsigned integer representing milliseconds in this data stream
 After that follows n bytes which of a "time string" that specifies wall-clock time 
 in an unspecified format.
 
-# JSON Expression
+# JSON Expression (Work in progress, do not rely on this at present)
 
 Although driven by a need for a byte-level protocol to communicate electronically, there is
 also need for a JSON-level expression of the standard. The obvious approach is to define
 and event as a JSON object. We hope to make it somewhat human readable, but maintain a 
 direct connection to the Byte Level expression of the PIRDS standard.
 
-Our first expression will thus be simple JSON objects, directly corresponding to the 
-standard, except that instead of using one-character codes will use the full word from
-which the character was derived. When it is a two-word, compond noun we will use only 
-the word in which the character appeas. The code character adn ONLY the code character
-will be capitalized.
+Our expression will use JSON objects with slightly more information names. The charcter
+codes will be used as is. The time in milliseconds. For now the values will use the same
+scale as defined in the byte level specifcations. This means that no floating point number will
+at present ever appear in a value field.
 
-So for example, a Flow measurment event will look like:
+So for example, measurement of 25C from sensor #2 in the ambient air would look  like:
 
 ```JavaScript
-{ "Event" : "M",
-  "Type" : "P",
-  
+{ "event" : "M",
+  "type" : "T",
+  "loc" : "B",
+  "num" : 2,
+  "ms" : 35,
+  "val" : 250
+  } 
 ```
 
 # License
