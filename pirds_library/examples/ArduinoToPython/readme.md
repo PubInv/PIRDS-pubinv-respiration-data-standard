@@ -17,17 +17,17 @@ For more information on adding a library: https://www.arduino.cc/en/guide/librar
 
 First upload the Arduino sketch to your arduino. Then launch the pythin script. You should see the Measurement data echoed back in your terminal. 
 
-#### BasicPIRDSMeasurementTest.ino
+#### Measurement_ArduinoToPython.ino
 
 This Arduino sketch places fake measurement data into a the PIRDS mearusment format and sends it over a serial connection to a Python script. It's very simple. 
 
 
-#### BasicPIRDSMeasurementTest.py
+#### Measurement_ArduinoToPython.py
 
 This Python program prints serial output coming from the Arduino.
 
 To run:
-> python3 BasicPIRDSMeasturementTest.py [serial port] [baud rate]
+> python3 Measurement_ArduinoToPython.py [serial port] [baud rate]
 
 
 

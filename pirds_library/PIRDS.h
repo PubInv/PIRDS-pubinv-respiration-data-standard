@@ -24,9 +24,9 @@ struct Measurement
   char          m {'M'};
   char          measurementType;
   char          deviceType;
-  char          deviceLocation;
-  int           measurementTime;
-  int           measurementValue;
+  unsigned char deviceLocation;
+  unsigned long measurementTime;
+  long          measurementValue;
 };
 
 
