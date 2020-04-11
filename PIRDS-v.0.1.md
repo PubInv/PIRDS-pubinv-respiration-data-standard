@@ -21,7 +21,9 @@ This is followed by an 32-bit unsigned integers representing milliseconds. In PI
 
 Finally, 32-bit signed integer 
 is provided. The type of every measurement is multiplied by a decimal to allow an integer to express the 
-acceptable range of value. Thus every measurement fits within 9 bytes.
+acceptable range of value. Thus every measurement fits within 12 bytes.
+
+Integers are stored in "Big-Endian" byte order within their 4 bytes.
 
 The Types are:
 
