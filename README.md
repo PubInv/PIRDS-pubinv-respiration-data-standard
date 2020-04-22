@@ -9,7 +9,7 @@ rapidly manufactured ventilators require extensive testing. In order to be teste
 tools, a data interchange format is required.
 
 There exists standards for waveform data, such those of [Physionet](https://physionet.org/content/bidmc/1.0.0/).
-We know of know format specific enough to respiratory data that meets our needs; but our time to research
+We know of no format specific enough to respiratory data that meets our needs; but our time to research
 has been limited.
 
 # Three Expressions of the Standard
