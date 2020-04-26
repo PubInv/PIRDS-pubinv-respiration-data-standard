@@ -1,5 +1,7 @@
-# respiration-data-standard
-[PubInv Respiration Data Standard (PIRDS) v0.1](https://github.com/PubInv/respiration-data-standard/blob/master/PIRDS-v.0.1.md) -- A standard for COVID-19 pandemic ventilator data exchange.
+# Public Invention Respiration Data Standard
+[Public Invention Respiration Data Standard (PIRDS) v0.1](https://github.com/PubInv/respiration-data-standard/blob/master/PIRDS-v.0.1.md) -- A standard for COVID-19 pandemic ventilator data exchange.
+
+This is a sister to the [Public Invention Respiration Control Standard (PIRCS)](https://github.com/PubInv/pubinv-respiration-control-standard).
 
 # Rationale
 
