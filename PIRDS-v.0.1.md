@@ -81,8 +81,8 @@ Meta Events are not measurements but may provide information about measurements.
 The mEta Events begin with character "E". The second character defines the meta
 event
 
-1. M : Message : the next byte defines the number of characters following. That
-many characters define a string that is an arbitrary message.
+1. M : Message : the next byte (b_size) defines the number of characters following. That
+many characters (buff) define a string that is an arbitrary message.
 1. N : Name event : the same format as a message.
 1. D : Device identifier : the same format as a device.
 1. C : Clock event : The Clock event is used to tie the relative milliseconds
