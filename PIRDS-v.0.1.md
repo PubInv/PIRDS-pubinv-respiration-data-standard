@@ -15,12 +15,12 @@ The most common PIRDS data are Measurement events.
 ![MeasurementByteFields](https://github.com/PubInv/respiration-data-standard/blob/master/images/measurement_fields.png)
 
 Measurements are of fixed length, and consisting the character "M", a measurement type character designator,
-a sensor designator consisting of a letter (location) and a nuumber 0-255. 
+a sensor designator consisting of a letter (location) and a nuumber 0-255.
 
-This is followed by an 32-bit unsigned integers representing milliseconds. In PIRDS data 
+This is followed by an 32-bit unsigned integers representing milliseconds. In PIRDS data
 
-Finally, 32-bit signed integer 
-is provided. The type of every measurement is multiplied by a decimal to allow an integer to express the 
+Finally, 32-bit signed integer
+is provided. The type of every measurement is multiplied by a decimal to allow an integer to express the
 acceptable range of value. Thus every measurement fits within 12 bytes.
 
 Integers are stored in "Big-Endian" byte order within their 4 bytes.
@@ -54,7 +54,7 @@ A minial ventilator might provide D0, B0, and A0.
 
 ### Sample Measurement
 
-The following measurement is a temperature measurement (B1: ‘T’) from the third (B3: 2) device in the ambient air (B2: ‘B’). The measurement occurred at 35ms (B4 - B7: 0035) and has a value of 25 degrees C (B9 - B11: 0250). 
+The following measurement is a temperature measurement (B1: ‘T’) from the third (B3: 2) device in the ambient air (B2: ‘B’). The measurement occurred at 35ms (B4 - B7: 0035) and has a value of 25 degrees C (B9 - B11: 0250).
 
 ![SampleMeasurement](https://github.com/PubInv/respiration-data-standard/blob/master/images/sample_measurement.png)
 
@@ -77,9 +77,9 @@ to represent the start of the time period of the asswertion?)
 
 ## Meta Events
 
-Meta Events are not measurements but may provide information about measurements. 
+Meta Events are not measurements but may provide information about measurements.
 The mEta Events begin with character "E". The second character defines the meta
-event
+event. Then the "ms" milliseconds unsigned 4 bytes fallows.
 
 1. M : Message : the next byte (b_size) defines the number of characters following. That
 many characters (buff) define a string that is an arbitrary message.
@@ -88,14 +88,14 @@ many characters (buff) define a string that is an arbitrary message.
 1. C : Clock event : The Clock event is used to tie the relative milliseconds
 to an absolute time. The first byte after C is a number n. However, the next
 four bytes are an unsigned integer representing milliseconds in this data stream.
-After that follows n bytes which of a "time string" that specifies wall-clock time 
+After that follows n bytes which of a "time string" that specifies wall-clock time
 in an unspecified format.
 
 # JSON Expression (Work in progress, do not rely on this at present)
 
 Although driven by a need for a byte-level protocol to communicate electronically, there is
 also need for a JSON-level expression of the standard. The obvious approach is to define
-and event as a JSON object. We hope to make it somewhat human readable, but maintain a 
+and event as a JSON object. We hope to make it somewhat human readable, but maintain a
 direct connection to the Byte Level expression of the PIRDS standard.
 
 Our expression will use JSON objects with slightly more information names. The charcter
@@ -112,10 +112,9 @@ So for example, measurement of 25C from sensor #2 in the ambient air would look 
   "num" : 2,
   "ms" : 35,
   "val" : 250
-  } 
+  }
 ```
 
 # License
 
 Released under a Creative Commons 0 (CC0) Universal License. All rights to the marks "PubInv" and "Public Invention" reserved.
-
