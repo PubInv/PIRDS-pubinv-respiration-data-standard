@@ -75,15 +75,20 @@ typedef struct Measurement
 typedef struct Message
 {
   char     event; // I cannot figure out how to initialize this; it is 'E'
-  char     type; // 'M' for Message
+  char     type; // 'M' for Message, 'C' for Clock Event
   uint32_t ms;
   uint8_t  b_size;
   char    buff[256];
 } Message;
 
+// A Clock Event has the same structure as a Message Event,
+// but the character buffer is not random but and ISO-8601 time string
+// with precision of seconds. It usese 'C' as its type.
 
-#define FLOW_TOO_HIGH "FLOW OUT OF RANGE HIGH";
-#define FLOW_TOO_LOW  "FLOW OUT OF RANGE LOW";
+
+#define FLOW_TOO_HIGH "FLOW OUT OF RANGE HIGH"
+#define FLOW_TOO_LOW  "FLOW OUT OF RANGE LOW"
+#define SAVE_LOG_TO_FILE "SAVE_LOG_TO_FILE:"
 
 /* Fill the byte buffer with a PIRDS-standard bytes from the
    Measurement Object */
