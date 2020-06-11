@@ -28,8 +28,8 @@ Integers are stored in "Big-Endian" byte order within their 4 bytes.
 The Types are:
 
 1. T : Temperature in degrees Celsius times 100
-2. P : Pressure: cm H2O (a medical standard) times 100
-2. D : Differential pressure: cm H2O (a medical standard) times 100 (the same unit, but RELATIVE, not ABSOLUTE)
+2. P : Pressure: cm H2O (a medical standard) times 10
+2. D : Differential pressure: cm H2O (a medical standard) times 10 (the same unit, but RELATIVE, not ABSOLUTE)
 3. F : Flow slm (liters at 0C per minute) times 1000
 4. O : FiO2 (fractional oxygen) times 100 (thus a percentage)
 5. H : humidity (% humidity ???) times 100
