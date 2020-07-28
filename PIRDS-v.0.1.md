@@ -6,7 +6,7 @@ PIRDS data is a series of events. It has no headers, though some events provide 
 together to form a header.
 
 We possible, we follow the principle of making data human-readable if possible. In particular, because this
-is meant in part for medical professionals, some unit types are chosen to conform that that field.
+is meant in part for medical professionals, some unit types are chosen to conform that field.
 
 ## Measurement Events
 
@@ -15,9 +15,7 @@ The most common PIRDS data are Measurement events.
 ![MeasurementByteFields](https://github.com/PubInv/respiration-data-standard/blob/master/images/measurement_fields.png)
 
 Measurements are of fixed length, and consisting the character "M", a measurement type character designator,
-a sensor designator consisting of a letter (location) and a nuumber 0-255.
-
-This is followed by an 32-bit unsigned integers representing milliseconds. In PIRDS data
+a sensor designator consisting of a letter (location) and a number 0-255. 
 
 Finally, 32-bit signed integer
 is provided. The type of every measurement is multiplied by a decimal to allow an integer to express the
@@ -38,18 +36,18 @@ The Types are:
 8. G : Gas resitance (ohms) used to check for volatile compounds
 8. A : Altitude in meters (used as a check of the system)
 
-The Sensor names roughly corresponed to identifiable locations in the breathing circuit.
+The Sensor names roughly corresponded to identifiable locations in the breathing circuit.
 We expect this to be extended.
 
 1. A : Airway
 1. B : amBient air
 1. M : sensors in the Mixer/blender before pressurization
-1. D : a pressure Differnce, of unspecified location.
+1. D : a pressure Difference, of unspecified location.
 
 For example, the first 3 sensors in the airway might be named A0, A1, A2. No distinction is made in
 the standard for inhalation airway from exhalation standard.
 
-A minial ventilator might provide D0, B0, and A0.
+A minimal ventilator might provide D0, B0, and A0.
 
 
 ### Sample Measurement
