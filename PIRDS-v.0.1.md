@@ -12,22 +12,29 @@ is meant in part for medical professionals, some unit types are chosen to confor
 
 The most common PIRDS data are Measurement events.
 
+![MeasurementByteFields](https://github.com/PubInv/respiration-data-standard/blob/master/images/measurement_fields.png)
+
 Measurements are of fixed length, and consisting the character "M", a measurement type character designator,
 a sensor designator consisting of a letter (location) and a number 0-255. 
 
-This is followed by an 32-bit unsigned integers representing milliseconds. In PIRDS data 
+Finally, 32-bit signed integer
+is provided. The type of every measurement is multiplied by a decimal to allow an integer to express the
+acceptable range of value. Thus every measurement fits within 12 bytes.
 
-Finally, 32-bit signed integer 
-is provided. The type of every measurement is multiplied by a decimal to allow an integer to express the 
-acceptable range of value. Thus every measurement fits within 9 bytes.
+Integers are stored in "Big-Endian" byte order within their 4 bytes.
 
 The Types are:
 
 1. T : Temperature in degrees Celsius times 100
-2. P : cm H2O (a medical standard) times 100
-3. F : slm (liters at 0C per minute) times 1000
+2. P : Pressure: cm H2O (a medical standard) times 10
+2. D : Differential pressure: cm H2O (a medical standard) times 10 (the same unit, but RELATIVE, not ABSOLUTE)
+3. F : Flow slm (liters at 0C per minute) times 1000
 4. O : FiO2 (fractional oxygen) times 100 (thus a percentage)
 5. H : humidity (% humidity ???) times 100
+6. V : Volume in millilieters
+7. B : Breaths per minute times 10
+8. G : Gas resitance (ohms) used to check for volatile compounds
+8. A : Altitude in meters (used as a check of the system)
 
 The Sensor names roughly corresponded to identifiable locations in the breathing circuit.
 We expect this to be extended.
@@ -42,23 +49,70 @@ the standard for inhalation airway from exhalation standard.
 
 A minimal ventilator might provide D0, B0, and A0.
 
+
+### Sample Measurement
+
+The following measurement is a temperature measurement (B1: ‘T’) from the third (B3: 2) device in the ambient air (B2: ‘B’). The measurement occurred at 35ms (B4 - B7: 0035) and has a value of 25 degrees C (B9 - B11: 0250).
+
+![SampleMeasurement](https://github.com/PubInv/respiration-data-standard/blob/master/images/sample_measurement.png)
+
+Hex Equivalent: 4D54 4202 0023 00FA
+
+
+## Assertions
+
+Assertions have the same structure as measurements. The begin with the character "A".
+The most important asseritons are:
+
+1. "B" : Type "B" bpm
+2. "V" : Type "V", tidal volume in milliters
+3. "X" : Maxiumum (peak) pressure
+4. "E" : Minimum airway pressure (PEEP)
+
+We have not defined the time period of the these assertions. At present, it is undefined.
+It may loosely be construed as "since the last such event reported". (Lauria, should we add a second field
+to represent the start of the time period of the asswertion?)
+
 ## Meta Events
 
-Meta Events are not measurements but may provide information about measurements. 
+Meta Events are not measurements but may provide information about measurements.
 The mEta Events begin with character "E". The second character defines the meta
-event
+event. Then the "ms" milliseconds unsigned 4 bytes fallows.
 
-1. M : Message : the next byte defines the number of characters following. That
-many characters define a string that is an arbitrary message.
+1. M : Message : the next byte (b_size) defines the number of characters following. That
+many characters (buff) define a string that is an arbitrary message.
 1. N : Name event : the same format as a message.
 1. D : Device identifier : the same format as a device.
 1. C : Clock event : The Clock event is used to tie the relative milliseconds
 to an absolute time. The first byte after C is a number n. However, the next
 four bytes are an unsigned integer representing milliseconds in this data stream.
-After that follows n bytes which of a "time string" that specifies wall-clock time 
+After that follows n bytes which of a "time string" that specifies wall-clock time
 in an unspecified format.
+
+# JSON Expression (Work in progress, do not rely on this at present)
+
+Although driven by a need for a byte-level protocol to communicate electronically, there is
+also need for a JSON-level expression of the standard. The obvious approach is to define
+and event as a JSON object. We hope to make it somewhat human readable, but maintain a
+direct connection to the Byte Level expression of the PIRDS standard.
+
+Our expression will use JSON objects with slightly more information names. The charcter
+codes will be used as is. The time in milliseconds. For now the values will use the same
+scale as defined in the byte level specifcations. This means that no floating point number will
+at present ever appear in a value field.
+
+So for example, measurement of 25C from sensor #2 in the ambient air would look  like:
+
+```JavaScript
+{ "event" : "M",
+  "type" : "T",
+  "loc" : "B",
+  "num" : 2,
+  "ms" : 35,
+  "val" : 250
+  }
+```
 
 # License
 
 Released under a Creative Commons 0 (CC0) Universal License. All rights to the marks "PubInv" and "Public Invention" reserved.
-
