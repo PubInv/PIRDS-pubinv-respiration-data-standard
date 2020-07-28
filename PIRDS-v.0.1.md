@@ -93,7 +93,7 @@ many characters (buff) define a string that is an arbitrary message.
 to an absolute time. The first byte after C is a number n. However, the next
 four bytes are an unsigned integer representing milliseconds in this data stream.
 After that follows n bytes which of a "time string" that specifies wall-clock time
-in an unspecified format.
+ [UTC](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) time in the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
 
 # JSON Expression (Work in progress, do not rely on this at present)
 
