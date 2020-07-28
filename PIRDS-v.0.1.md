@@ -29,7 +29,7 @@ The Types are:
 2. P : Pressure: cm H2O (a medical standard) times 10
 2. D : Differential pressure: cm H2O (a medical standard) times 10 (the same unit, but RELATIVE, not ABSOLUTE)
 3. F : Flow slm (liters at 0C per minute) times 1000
-4. O : FiO2 (fractional oxygen) times 100 (thus a percentage)
+4. O : FO2 (fractional oxygen) times 100 (thus a percentage)
 5. H : humidity (% humidity ???) times 100
 6. V : Volume in millilieters
 7. B : Breaths per minute times 10
