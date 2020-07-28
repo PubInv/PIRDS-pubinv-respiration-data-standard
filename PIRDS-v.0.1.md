@@ -43,9 +43,14 @@ We expect this to be extended.
 1. B : amBient air
 1. M : sensors in the Mixer/blender before pressurization
 1. D : a pressure Difference, of unspecified location.
+1. I : Inspiratory manifold
+1. E : Expiratory manifold
 
-For example, the first 3 sensors in the airway might be named A0, A1, A2. No distinction is made in
-the standard for inhalation airway from exhalation standard.
+For example, the first 3 sensors in the airway might be named A0, A1, A2. Typically `Airway` sensors
+will be located within at the Y connector closest to the patient, but the `Inspiratory` and `Expriratory`
+sensors will be mounted within the ventilator's enclosure. Pressure at all three locations would generally
+be almost identical, however both gas analysis and flow patterns will be completely different at the three
+locations. 
 
 A minimal ventilator might provide D0, B0, and A0.
 
