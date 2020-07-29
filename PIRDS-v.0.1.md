@@ -89,6 +89,8 @@ event. Then the "ms" milliseconds unsigned 4 bytes fallows.
 many characters (buff) define a string that is an arbitrary message.
 1. N : Name event : the same format as a message.
 1. D : Device identifier : the same format as a device.
+
+### The Clock Event
 1. C : Clock event : The Clock event is used to tie the relative milliseconds
 to an absolute time. The first byte after C is a number n. However, the next
 four bytes are an unsigned integer representing milliseconds in this data stream.
@@ -96,6 +98,7 @@ After that follows n bytes which of a "time string" that specifies wall-clock ti
 [UTC](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) time in the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
 An example of this format is:
 > { "event": "E", "type": "C", "ms": 10443, "buff": "Sun Jul 26 22:19:10 2020" },
+
 Note: In the C Language, we use the following code snippet to generate this human-readable time stream in UTC/Zulu Time/GMT. By always
 using UTC, we remove some geographic timezone complexity.
 >    struct tm *ptm = gmtime(&now);
