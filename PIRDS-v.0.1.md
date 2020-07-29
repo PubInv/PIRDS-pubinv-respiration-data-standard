@@ -111,7 +111,7 @@ using UTC, we remove some geographic timezone complexity.
    sprintf(iso_time_string,"%s", asctime(ptm));
 ```
 
-# JSON Expression (Work in progress, do not rely on this at present)
+# JSON Expression
 
 Although driven by a need for a byte-level protocol to communicate electronically, there is
 also need for a JSON-level expression of the standard. The obvious approach is to define
