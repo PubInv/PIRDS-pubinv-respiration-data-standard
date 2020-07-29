@@ -105,6 +105,8 @@ Note: In the C Language, we use the following code snippet to generate this huma
 using UTC, we remove some geographic timezone complexity.
 
 ```C
+   char iso_time_string[256];
+   time_t now;
    struct tm *ptm = gmtime(&now);
    sprintf(iso_time_string,"%s", asctime(ptm));
 ```
