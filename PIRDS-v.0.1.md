@@ -6,7 +6,7 @@ PIRDS data is a series of events. It has no headers, though some events provide 
 together to form a header.
 
 We possible, we follow the principle of making data human-readable if possible. In particular, because this
-is meant in part for medical professionals, some unit types are chosen to conform that that field.
+is meant in part for medical professionals, some unit types are chosen to conform that field.
 
 ## Measurement Events
 
@@ -15,9 +15,7 @@ The most common PIRDS data are Measurement events.
 ![MeasurementByteFields](https://github.com/PubInv/respiration-data-standard/blob/master/images/measurement_fields.png)
 
 Measurements are of fixed length, and consisting the character "M", a measurement type character designator,
-a sensor designator consisting of a letter (location) and a nuumber 0-255.
-
-This is followed by an 32-bit unsigned integers representing milliseconds. In PIRDS data
+a sensor designator consisting of a letter (location) and a number 0-255. 
 
 Finally, 32-bit signed integer
 is provided. The type of every measurement is multiplied by a decimal to allow an integer to express the
@@ -28,28 +26,34 @@ Integers are stored in "Big-Endian" byte order within their 4 bytes.
 The Types are:
 
 1. T : Temperature in degrees Celsius times 100
-2. P : Pressure: cm H2O (a medical standard) times 100
-2. D : Differential pressure: cm H2O (a medical standard) times 100 (the same unit, but RELATIVE, not ABSOLUTE)
+2. P : Pressure: cm H2O (a medical standard) times 10
+2. D : Differential pressure: cm H2O (a medical standard) times 10 (the same unit, but RELATIVE, not ABSOLUTE)
 3. F : Flow slm (liters at 0C per minute) times 1000
-4. O : FiO2 (fractional oxygen) times 100 (thus a percentage)
+4. O : FO2 (fractional oxygen) times 100 (thus a percentage)
 5. H : humidity (% humidity ???) times 100
 6. V : Volume in millilieters
 7. B : Breaths per minute times 10
 8. G : Gas resitance (ohms) used to check for volatile compounds
 8. A : Altitude in meters (used as a check of the system)
+9. C : Carbon dioxide concentration in tenths of mmHg 
 
-The Sensor names roughly corresponed to identifiable locations in the breathing circuit.
+The Sensor names roughly corresponded to identifiable locations in the breathing circuit.
 We expect this to be extended.
 
 1. A : Airway
 1. B : amBient air
 1. M : sensors in the Mixer/blender before pressurization
-1. D : a pressure Differnce, of unspecified location.
+1. D : a pressure Difference, of unspecified location.
+1. I : Inspiratory manifold
+1. E : Expiratory manifold
 
-For example, the first 3 sensors in the airway might be named A0, A1, A2. No distinction is made in
-the standard for inhalation airway from exhalation standard.
+For example, the first 3 sensors in the airway might be named A0, A1, A2. Typically `Airway` sensors
+will be located within at the Y connector closest to the patient, but the `Inspiratory` and `Expriratory`
+sensors will be mounted within the ventilator's enclosure. Pressure at all three locations would generally
+be almost identical, however both gas analysis and flow patterns will be completely different at the three
+locations. 
 
-A minial ventilator might provide D0, B0, and A0.
+A minimal ventilator might provide D0, B0, and A0.
 
 
 ### Sample Measurement
@@ -85,13 +89,29 @@ event. Then the "ms" milliseconds unsigned 4 bytes fallows.
 many characters (buff) define a string that is an arbitrary message.
 1. N : Name event : the same format as a message.
 1. D : Device identifier : the same format as a device.
+
+### The Clock Event
 1. C : Clock event : The Clock event is used to tie the relative milliseconds
 to an absolute time. The first byte after C is a number n. However, the next
 four bytes are an unsigned integer representing milliseconds in this data stream.
 After that follows n bytes which of a "time string" that specifies wall-clock time
-in an unspecified format.
+[UTC](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) time in the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+An example of this format is:
+```JavaScript
+{ "event": "E", "type": "C", "ms": 10443, "buff": "Sun Jul 26 22:19:10 2020" },
+```
 
-# JSON Expression (Work in progress, do not rely on this at present)
+Note: In the C Language, we use the following code snippet to generate this human-readable time stream in UTC/Zulu Time/GMT. By always
+using UTC, we remove some geographic timezone complexity.
+
+```C
+   char iso_time_string[256];
+   time_t now;
+   struct tm *ptm = gmtime(&now);
+   sprintf(iso_time_string,"%s", asctime(ptm));
+```
+
+# JSON Expression
 
 Although driven by a need for a byte-level protocol to communicate electronically, there is
 also need for a JSON-level expression of the standard. The obvious approach is to define
