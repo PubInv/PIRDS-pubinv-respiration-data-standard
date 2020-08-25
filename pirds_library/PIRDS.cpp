@@ -77,7 +77,7 @@ Measurement get_measurement_from_buffer(uint8_t* buff,unsigned blim) {
 
 int fill_JSON_buffer_measurement(Measurement* m,char* buff,unsigned blim) {
   int rval = sprintf(buff,
-  "{ \"event\": \"M\", \"type\": \"%c\", \"ms\": %u, \"loc\": \"%c\", \"num\": %u, \"val\": %d }",
+  "{ \"event\": \"M\", \"type\": \"%c\", \"ms\": %lu, \"loc\": \"%c\", \"num\": %u, \"val\": %ld }",
                      m->type,
                      m->ms,
                      m->loc,
@@ -213,7 +213,7 @@ int fill_JSON_buffer_message(Message* m,char* buff,unsigned blim) {
 
   //  fprintf(stderr,"str_buff %s",buff);
     int rval = sprintf(buff,
-  "{ \"event\": \"E\", \"type\": \"M\", \"ms\": %u, \"b_size\": %u, \"buff\" : \"%s\" }",
+  "{ \"event\": \"E\", \"type\": \"M\", \"ms\": %lu, \"b_size\": %u, \"buff\" : \"%s\" }",
                        m->ms,
                        m->b_size,
                        str_buff);
