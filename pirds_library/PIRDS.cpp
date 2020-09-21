@@ -54,7 +54,7 @@ as a C file.
 
 /* Fill the byte buffer with a PIRDS-standard bytes from the
    Measurement Object */
-int fill_byte_buffer_measurement(Measurement* m,uint8_t* buff,unsigned blim) {
+int fill_byte_buffer_measurement(Measurement* m,uint8_t* buff,uint16_t blim) {
   buff[0] = m->event;
   buff[1] = m->type;
   buff[2] = m->loc;
@@ -64,7 +64,7 @@ int fill_byte_buffer_measurement(Measurement* m,uint8_t* buff,unsigned blim) {
   return 0;
 }
 
-Measurement get_measurement_from_buffer(uint8_t* buff,unsigned blim) {
+Measurement get_measurement_from_buffer(uint8_t* buff,uint16_t blim) {
   Measurement m;
   m.event = buff[0];
   m.type = buff[1];
@@ -75,7 +75,7 @@ Measurement get_measurement_from_buffer(uint8_t* buff,unsigned blim) {
   return m;
 }
 
-int fill_JSON_buffer_measurement(Measurement* m,char* buff,unsigned blim) {
+int fill_JSON_buffer_measurement(Measurement* m,char* buff,uint16_t blim) {
   int rval = sprintf(buff,
   "{ \"event\": \"M\", \"type\": \"%c\", \"ms\": %lu, \"loc\": \"%c\", \"num\": %u, \"val\": %ld }",
                      m->type,
@@ -155,7 +155,7 @@ int assign_value_measurement(Measurement *m,char* k, char*v) {
 
 // Note: This is a VERY weak and specialized JSON parser
 // This will fail if a string contains a colon!!!
-Measurement get_measurement_from_JSON(char* buff,unsigned blim) {
+Measurement get_measurement_from_JSON(char* buff,uint16_t blim) {
   int i = 0;
   Measurement m;
   //  char *scratch = strtok(buff, "{,:}");
@@ -177,7 +177,7 @@ Measurement get_measurement_from_JSON(char* buff,unsigned blim) {
 
 
 
-int fill_byte_buffer_message(Message* m,uint8_t* buff,unsigned blim) {
+int fill_byte_buffer_message(Message* m,uint8_t* buff,uint16_t blim) {
   buff[0] = m->event;
   buff[1] = m->type;
   *((uint32_t *) &buff[2]) = htonl(m->ms);
@@ -188,7 +188,7 @@ int fill_byte_buffer_message(Message* m,uint8_t* buff,unsigned blim) {
   return 0;
 }
 
-Message get_message_from_buffer(uint8_t* buff,unsigned blim) {
+Message get_message_from_buffer(uint8_t* buff,uint16_t blim) {
   Message m;
   m.event = buff[0];
   m.type = buff[1];
@@ -202,7 +202,7 @@ Message get_message_from_buffer(uint8_t* buff,unsigned blim) {
 }
 
 // Need to work out the limit math better...
-int fill_JSON_buffer_message(Message* m,char* buff,unsigned blim) {
+int fill_JSON_buffer_message(Message* m,char* buff,uint16_t blim) {
   char str_buff[257];
 
   strcpy(str_buff,m->buff);
@@ -252,7 +252,7 @@ int assign_value_message(Message *m,char* k, char*v) {
   return 1;
 }
 
-Message get_message_from_JSON(char* buff,unsigned blim) {
+Message get_message_from_JSON(char* buff,uint16_t blim) {
 
   int i = 0;
   Message m;

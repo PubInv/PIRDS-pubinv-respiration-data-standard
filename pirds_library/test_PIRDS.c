@@ -16,7 +16,7 @@ static char *test_can_create_Measurement_and_read_back_as_byte_buffer() {
   Measurement m = {
     'M','T',101,'B',3,-10115
   };
-  const unsigned BUFF_SIZE = 13;
+  const uint16_t BUFF_SIZE = 13;
   uint8_t buff[BUFF_SIZE];
   int err = fill_byte_buffer_measurement(&m,buff,BUFF_SIZE);
   Measurement mp = get_measurement_from_buffer(buff,BUFF_SIZE);
@@ -32,7 +32,7 @@ static char *test_can_create_Measurement_and_read_back_as_JSON() {
   Measurement m = {
     'M','T',101,'B',3,-10115
   };
-  const unsigned BUFF_SIZE = 256;
+  const uint16_t BUFF_SIZE = 256;
   char buff[BUFF_SIZE];
   int err = fill_JSON_buffer_measurement(&m,buff,BUFF_SIZE);
   mu_assert("buffer problem", err > 0);
@@ -74,7 +74,7 @@ static char *test_can_create_Message_and_read_back_as_byte_buffer() {
   Message m = {
     'E','M',4000,18,"Buckminster Fuller"
   };
-  const unsigned BUFF_SIZE = 18+7;
+  const uint16_t BUFF_SIZE = 18+7;
   uint8_t buff[BUFF_SIZE];
   int err = fill_byte_buffer_message(&m,buff,BUFF_SIZE);
   Message mp = get_message_from_buffer(buff,BUFF_SIZE);
@@ -91,7 +91,7 @@ static char *test_can_create_Message_and_read_back_as_JSON() {
   Message m = {
     'E','M',4000,18,"Buckminster Fuller"
   };
-  const unsigned BUFF_SIZE = 256+7;
+  const uint16_t BUFF_SIZE = 256+7;
   char buff[BUFF_SIZE];
   int err = fill_JSON_buffer_message(&m,buff,BUFF_SIZE);
   mu_assert("buffer problem", err > 0);

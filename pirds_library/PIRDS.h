@@ -92,23 +92,23 @@ typedef struct Message
 
 /* Fill the byte buffer with a PIRDS-standard bytes from the
    Measurement Object */
-int fill_byte_buffer_measurement(Measurement* m,uint8_t* buff,unsigned blim);
+int fill_byte_buffer_measurement(Measurement* m,uint8_t* buff,uint16_t blim);
 
-Measurement get_measurement_from_buffer(uint8_t* buff,unsigned blim);
+Measurement get_measurement_from_buffer(uint8_t* buff,uint16_t blim);
 
-int fill_JSON_buffer_measurement(Measurement* m,char* buff,unsigned blim);
+int fill_JSON_buffer_measurement(Measurement* m,char* buff,uint16_t blim);
 
-Measurement get_measurement_from_JSON(char* buff,unsigned blim);
+Measurement get_measurement_from_JSON(char* buff,uint16_t blim);
 
 
 
-int fill_byte_buffer_message(Message* m,uint8_t* buff,unsigned blim);
+int fill_byte_buffer_message(Message* m,uint8_t* buff,uint16_t blim);
 
-Message get_message_from_buffer(uint8_t* buff,unsigned blim);
+Message get_message_from_buffer(uint8_t* buff,uint16_t blim);
 
-int fill_JSON_buffer_message(Message* m,char* buff,unsigned blim);
+int fill_JSON_buffer_message(Message* m,char* buff,uint16_t blim);
 
-Message get_message_from_JSON(char* buff,unsigned blim);
+Message get_message_from_JSON(char* buff,uint16_t blim);
 
 
 /*  PLACEHOLDERS
