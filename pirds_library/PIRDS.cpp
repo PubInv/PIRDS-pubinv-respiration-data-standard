@@ -54,7 +54,7 @@ as a C file.
 
 /* Fill the byte buffer with a PIRDS-standard bytes from the
    Measurement Object */
-int fill_byte_buffer_measurement(Measurement* m,uint8_t* buff,uint16_t blim) {
+uint16_t fill_byte_buffer_measurement(Measurement* m,uint8_t* buff,uint16_t blim) {
   buff[0] = m->event;
   buff[1] = m->type;
   buff[2] = m->loc;
@@ -75,8 +75,8 @@ Measurement get_measurement_from_buffer(uint8_t* buff,uint16_t blim) {
   return m;
 }
 
-int fill_JSON_buffer_measurement(Measurement* m,char* buff,uint16_t blim) {
-  int rval = sprintf(buff,
+uint16_t fill_JSON_buffer_measurement(Measurement* m,char* buff,uint16_t blim) {
+  uint16_t rval = sprintf(buff,
   "{ \"event\": \"M\", \"type\": \"%c\", \"ms\": %lu, \"loc\": \"%c\", \"num\": %u, \"val\": %ld }",
                      m->type,
                      m->ms,
@@ -177,7 +177,7 @@ Measurement get_measurement_from_JSON(char* buff,uint16_t blim) {
 
 
 
-int fill_byte_buffer_message(Message* m,uint8_t* buff,uint16_t blim) {
+uint16_t fill_byte_buffer_message(Message* m,uint8_t* buff,uint16_t blim) {
   buff[0] = m->event;
   buff[1] = m->type;
   *((uint32_t *) &buff[2]) = htonl(m->ms);
@@ -202,7 +202,7 @@ Message get_message_from_buffer(uint8_t* buff,uint16_t blim) {
 }
 
 // Need to work out the limit math better...
-int fill_JSON_buffer_message(Message* m,char* buff,uint16_t blim) {
+uint16_t fill_JSON_buffer_message(Message* m,char* buff,uint16_t blim) {
   char str_buff[257];
 
   strcpy(str_buff,m->buff);
