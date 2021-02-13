@@ -266,3 +266,16 @@ Message get_message_from_JSON(char* buff,uint16_t blim) {
   assign_value_message(&m,k,v);
   return m;
 }
+
+char get_event_designation_char_from_json(char* buff,uint16_t blim) {
+    char *k = strtok(buff , "{,:}");
+    char *v = strtok(NULL, "{,:}");
+    char *stripped_key = trimwhitespace(k);
+    char *stripped_value = trimwhitespace(v);
+    if (0 == strcmp(stripped_key,"\"event\"")) {
+      return stripped_value[1];
+    } else {
+      return '\0'; // same as zero, an error condition
+    }
+
+}

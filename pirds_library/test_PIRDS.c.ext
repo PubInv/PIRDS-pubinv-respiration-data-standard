@@ -108,12 +108,38 @@ static char *test_can_create_Message_and_read_back_as_JSON() {
 }
 
 
+static char *test_get_event_designation() {
+  Message me = {
+    'E','M',4000,18,"Buckminster Fuller"
+  };
+  Measurement ms = {
+    'M','T',101,'B',3,-10115
+  };
+
+  const uint16_t BUFF_SIZE = 256+7;
+  char buff[BUFF_SIZE];
+  int err;
+  err = fill_JSON_buffer_message(&me,buff,BUFF_SIZE);
+  mu_assert("buffer problem", err > 0);
+  mu_assert("failed to get Message as E", 'E' == get_event_designation_char_from_json(buff,BUFF_SIZE));
+
+  err = fill_JSON_buffer_measurement(&ms,buff,BUFF_SIZE);
+  mu_assert("failed to get Measurement as M", 'M' == get_event_designation_char_from_json(buff,BUFF_SIZE));
+
+  // NOTE: Intentionally misspelled!
+  sprintf(buff,"{ exent: X}");
+  mu_assert("failed to return null when no event",0 == get_event_designation_char_from_json(buff,BUFF_SIZE));
+
+  return 0;
+}
+
 static char * all_tests() {
   mu_run_test(test_can_create_Measurement_and_read_back_as_byte_buffer);
   mu_run_test(test_can_create_Measurement_and_read_back_as_JSON);
 
   mu_run_test(test_can_create_Message_and_read_back_as_byte_buffer);
   mu_run_test(test_can_create_Message_and_read_back_as_JSON);
+  mu_run_test(test_get_event_designation);
 
   return 0;
 }

@@ -90,6 +90,13 @@ typedef struct Message
 #define FLOW_TOO_LOW  "FLOW OUT OF RANGE LOW"
 #define SAVE_LOG_TO_FILE "SAVE_LOG_TO_FILE:"
 
+
+// This function returns the character in the "event" tag of the JSON object,
+// or null/0 if there is none. This function can be used to determine if
+// a JSON string is a measurement ('M') or a message ('E'). This then
+// allows the proper interpretation function below to be called.
+char get_event_designation_char_from_json(char* buff,uint16_t blim);
+
 /* Fill the byte buffer with a PIRDS-standard bytes from the
    Measurement Object */
 uint16_t fill_byte_buffer_measurement(Measurement* m,uint8_t* buff,uint16_t blim);
