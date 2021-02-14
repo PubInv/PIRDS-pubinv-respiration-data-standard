@@ -175,8 +175,6 @@ Measurement get_measurement_from_JSON(char* buff,uint16_t blim) {
   return m;
 }
 
-
-
 uint16_t fill_byte_buffer_message(Message* m,uint8_t* buff,uint16_t blim) {
   buff[0] = m->event;
   buff[1] = m->type;
@@ -267,15 +265,21 @@ Message get_message_from_JSON(char* buff,uint16_t blim) {
   return m;
 }
 
-char get_event_designation_char_from_json(char* buff,uint16_t blim) {
-    char *k = strtok(buff , "{,:}");
-    char *v = strtok(NULL, "{,:}");
-    char *stripped_key = trimwhitespace(k);
-    char *stripped_value = trimwhitespace(v);
-    if (0 == strcmp(stripped_key,"\"event\"")) {
-      return stripped_value[1];
-    } else {
-      return '\0'; // same as zero, an error condition
-    }
+char get_event_designation_char_from_json(const char* cbuff,uint16_t blim) {
+  // Note: Because strtok is a destructive opearation and
+  // the whole point of this operation is later use buff, we are doing
+  // a copy here.
+  char buff[64];
+  strncpy(buff,cbuff,64);
+
+  char *k = strtok(buff , "{,:}");
+  char *v = strtok(NULL, "{,:}");
+  char *stripped_key = trimwhitespace(k);
+  char *stripped_value = trimwhitespace(v);
+  if (0 == strcmp(stripped_key,"\"event\"")) {
+    return stripped_value[1];
+  } else {
+    return '\0'; // same as zero, an error condition
+  }
 
 }

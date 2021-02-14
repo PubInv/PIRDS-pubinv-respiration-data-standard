@@ -95,7 +95,9 @@ typedef struct Message
 // or null/0 if there is none. This function can be used to determine if
 // a JSON string is a measurement ('M') or a message ('E'). This then
 // allows the proper interpretation function below to be called.
-char get_event_designation_char_from_json(char* buff,uint16_t blim);
+
+// Note: This is the NOT DESTRUCTIVE of buff!
+char get_event_designation_char_from_json(const char* buff,uint16_t blim);
 
 /* Fill the byte buffer with a PIRDS-standard bytes from the
    Measurement Object */
@@ -105,9 +107,8 @@ Measurement get_measurement_from_buffer(uint8_t* buff,uint16_t blim);
 
 uint16_t fill_JSON_buffer_measurement(Measurement* m,char* buff,uint16_t blim);
 
+// Note: This is this IS DESTRUCTIVE of buff!
 Measurement get_measurement_from_JSON(char* buff,uint16_t blim);
-
-
 
 uint16_t fill_byte_buffer_message(Message* m,uint8_t* buff,uint16_t blim);
 
@@ -115,6 +116,7 @@ Message get_message_from_buffer(uint8_t* buff,uint16_t blim);
 
 uint16_t fill_JSON_buffer_message(Message* m,char* buff,uint16_t blim);
 
+// Note: This is this IS DESTRUCTIVE of buff!
 Message get_message_from_JSON(char* buff,uint16_t blim);
 
 

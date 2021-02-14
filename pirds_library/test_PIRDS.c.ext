@@ -133,6 +133,22 @@ static char *test_get_event_designation() {
   return 0;
 }
 
+static char *test_string_quoting() {
+  char buffer[256];
+  sprintf(buffer,"{\"event\":\"M\",\"type\":\"T\",\"loc\":\"B\",\"num\":2,\"ms\":35,\"val\":250}");
+  const int BUFF_SIZE = strlen(buffer);
+  Measurement m = get_measurement_from_JSON(buffer,1024);
+  //  render_measurement(&m);
+
+  mu_assert("message byte wrong", m.event == 'M');
+  mu_assert("type wrong", m.type == 'T');
+  mu_assert("loc wrong", m.loc == 'B');
+  mu_assert("num wrong", m.num == 2);
+  mu_assert("ms wrong", m.ms == 35);
+  mu_assert("val wrong", m.val == 250);
+  return 0;
+}
+
 static char * all_tests() {
   mu_run_test(test_can_create_Measurement_and_read_back_as_byte_buffer);
   mu_run_test(test_can_create_Measurement_and_read_back_as_JSON);
@@ -140,6 +156,7 @@ static char * all_tests() {
   mu_run_test(test_can_create_Message_and_read_back_as_byte_buffer);
   mu_run_test(test_can_create_Message_and_read_back_as_JSON);
   mu_run_test(test_get_event_designation);
+  mu_run_test(test_string_quoting);
 
   return 0;
 }
