@@ -17,6 +17,16 @@ The most common PIRDS data are Measurement events.
 Measurements are of fixed length, and consisting the character "M", a measurement type character designator,
 a sensor designator consisting of a letter (location) and a number 0-255.
 
+The the byte buffer above, the six fields are positional and don't require names. However, for discussion and in the 
+the JavaScript binding, these fields are:
+
+1. event,
+1. type,
+1. loc (location),
+1. num (senosr number in that location),
+1. ms (relative millisecond),
+1. val (value)
+
 Finally, 32-bit signed integer
 is provided. The type of every measurement is multiplied by a decimal to allow an integer to express the
 acceptable range of value. Thus every measurement fits within 12 bytes.
