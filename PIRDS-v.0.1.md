@@ -1,4 +1,4 @@
-# Public Invention Respiratory Data Standard (PIRDS) (v0.1)
+# Public Invention Respiratory Data Standard (PIRDS) (v0.3)
 
 ## Event based protocol
 
@@ -15,7 +15,7 @@ The most common PIRDS data are Measurement events.
 ![MeasurementByteFields](https://github.com/PubInv/respiration-data-standard/blob/master/images/measurement_fields.png)
 
 Measurements are of fixed length, and consisting the character "M", a measurement type character designator,
-a sensor designator consisting of a letter (location) and a number 0-255. 
+a sensor designator consisting of a letter (location) and a number 0-255.
 
 Finally, 32-bit signed integer
 is provided. The type of every measurement is multiplied by a decimal to allow an integer to express the
@@ -35,7 +35,7 @@ The Types are:
 7. B : Breaths per minute times 10
 8. G : Gas resitance (ohms) used to check for volatile compounds
 8. A : Altitude in meters (used as a check of the system)
-9. C : Carbon dioxide concentration in tenths of mmHg 
+9. C : Carbon dioxide concentration in tenths of mmHg
 
 The Sensor names roughly corresponded to identifiable locations in the breathing circuit.
 We expect this to be extended.
@@ -51,7 +51,7 @@ For example, the first 3 sensors in the airway might be named A0, A1, A2. Typica
 will be located within at the Y connector closest to the patient, but the `Inspiratory` and `Expriratory`
 sensors will be mounted within the ventilator's enclosure. Pressure at all three locations would generally
 be almost identical, however both gas analysis and flow patterns will be completely different at the three
-locations. 
+locations.
 
 A minimal ventilator might provide D0, B0, and A0.
 
@@ -134,6 +134,36 @@ So for example, measurement of 25C from sensor #2 in the ambient air would look 
   "val" : 250
   }
 ```
+
+# Patient-identifying extention to the JSON binding
+
+On September 25th, 2021, we extended the sibling PIRCS specification to allow the specification
+of a patient identifying 40-character string and a 32-bit unsigned integer "shorthand".
+This would allow data from multiple patients to be collected from the same source to be
+collected that could not be disambiguated any other way. (Previously and still we use IP
+address as a disambiguator of data streams in our logger, but we may not always have
+separate distinct IP addresses.)
+
+In order to accomodate this, the standard adds a new fields called "sht" (for "shorthand")
+and "pid" (for "patient id"), each of which
+may or may not be present in a PIRDS message. It may look like this:
+
+```JavaScript
+{ "event" : "M",
+  "type" : "T",
+  "loc" : "B",
+  "num" : 2,
+  "ms" : 35,
+  "val" : 250
+  "sht" : 6754328
+  "pid" : "834f44a2-4bf3-40ba-827b-ba2a8cc59531"
+  }
+```
+To indicate patient number 6754328 experienced A pressure of 25 cm at 35 ms into the data stream.
+
+As of this writing, this part of the standard is not currently implemented in the C library
+which implements the rest of the standard (found in this repo.)
+
 
 # License
 
