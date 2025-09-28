@@ -5,7 +5,7 @@
 PIRDS data is a series of events. It has no headers, though some events provide meta-information and may be grouped
 together to form a header.
 
-We possible, we follow the principle of making data human-readable if possible. In particular, because this
+When  possible, we follow the principle of making data human-readable if possible. In particular, because this
 is meant in part for medical professionals, some unit types are chosen to conform that field.
 
 ## Measurement Events
